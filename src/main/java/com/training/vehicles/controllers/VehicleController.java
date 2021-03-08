@@ -44,7 +44,7 @@ public class VehicleController {
         return vehicleService.saveVehicle(vehicle);
     }
 
-    public @PostMapping(value = "/saveAll")
+    public @PostMapping(value = "/save-all")
     List<Vehicle> saveVehicleList(@RequestBody List<Vehicle> vehicleList){
         return vehicleService.saveVehicleList(vehicleList);
     }
