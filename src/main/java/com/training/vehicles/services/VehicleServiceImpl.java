@@ -2,15 +2,17 @@ package com.training.vehicles.services;
 
 import com.training.vehicles.entities.Vehicle;
 import com.training.vehicles.repositories.VehicleRepository;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VehicleServiceImpl implements VehicleService{
+public class VehicleServiceImpl implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
 
@@ -29,13 +31,16 @@ public class VehicleServiceImpl implements VehicleService{
     @Override
     public Vehicle findVehicleById(Long id) {
         Optional<Vehicle> vehicleOptional = vehicleRepository.findById(id);
-        return vehicleOptional.orElseThrow(()-> new EntityNotFoundException("No vehicle with such id: " + id));
+        return vehicleOptional.orElseThrow(() -> new EntityNotFoundException("No vehicle with such id: " + id));
     }
 
     @Override
     public List<Vehicle> findAllVehiclesByColor(String color) {
-        Iterable<Vehicle> vehicles = vehicleRepository.findAllByColor(color);
+//        Iterable<Vehicle> vehicles = vehicleRepository.findAllByColor(color);
+        Iterable<Vehicle> vehicles = vehicleRepository.findAll();
+
         return StreamSupport.stream(vehicles.spliterator(), true)
+                .filter(x -> x.getColor().equals(color))
                 .collect(Collectors.toList());
     }
 
