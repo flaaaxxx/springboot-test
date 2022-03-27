@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcResultMatchersDsl;
@@ -68,4 +69,20 @@ class VehicleControllerIntegrationTest {
     }
 
 
+    @Test
+    public void shouldAddNewElement() throws Exception {
+
+        Vehicle v1 = new Vehicle();
+        v1.setColor("red");
+        v1.setBrand("Peugeot");
+        v1.setModel("307");
+        v1.setId(1L);
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/vehicles")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(v1)))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andReturn();
+    }
+    
 }

@@ -20,7 +20,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 //@SpringBootTest
-@ExtendWith(MockitoExtension.class) // Dzi?ki temu testy wykonuj? si? szybciej. Ca?y kontekst springa nie jest podnoszony
+@ExtendWith(MockitoExtension.class) // Dzięki temu testy wykonuj? się szybciej. Cały kontekst springa nie jest podnoszony
 class VehicleServiceImplTest {
 
     private VehicleService vehicleService;
