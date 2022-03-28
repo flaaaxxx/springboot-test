@@ -3,6 +3,7 @@ package com.training.vehicles.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.training.vehicles.entities.Vehicle;
 import org.flywaydb.core.Flyway;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,11 @@ class VehicleControllerIntegrationTest {
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andReturn();
     }
-    
+
+    @AfterEach
+    public void getFlyway() {
+        flyway.clean();
+        flyway.migrate();
+    }
+
 }
